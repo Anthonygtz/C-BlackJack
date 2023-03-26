@@ -7,11 +7,11 @@ When implementing the game, the goal was to make it simple and user-friendly. Al
 ## How to Run
 To run the Blackjack game, follow these steps:
 
-Clone the repository containing the game code onto your local machine using the appropriate method (ex: git clone https://github.com/Anthonygtz/C-BlackJack.git)
-Open the repository folder in your preferred Python IDE
-Open the Game.py file
-Run the file using the IDE's run command or by executing python Game.py in a terminal window
-Run the file and follow the prompts to play the game
+ - Clone the repository containing the game code onto your local machine using the appropriate method (ex: git clone https://github.com/Anthonygtz/C-BlackJack.git)
+ - Open the repository folder in your preferred Python IDE
+ - Open the Game.py file
+ - Run the file using the IDE's run command or by executing python Game.py in a terminal window
+ - Run the file and follow the prompts to play the game
 
 ## Other Resources
 Python Libraries:

@@ -32,20 +32,14 @@ def deal_cards(num_cards):
         # Choose a random card from the list
         randomvalue = random.choice(list(valueCard.keys()))
         randomtype = random.choice(typeCard)
-
         card = (randomvalue, randomtype)
-
         cards.append(card)
-
     return cards
 
 # Function to print the dealer's hand
-def print_dealer_hand(cards, reveal_hidden_card=False):
+def print_dealer_hand(cards):
     print("The dealer's hand:")
-    if not reveal_hidden_card:
-        print("○------○\n|      |\n|      |\n|      |\n○------○") # Hide the first card
-    else:
-        print(f"○------○\n|    {cards[0][1]} |\n|   {cards[0][0]}  |\n| {cards[0][1]}    |\n○------○")
+    print(f"○------○\n|    {cards[0][1]} |\n|   {cards[0][0]}  |\n| {cards[0][1]}    |\n○------○")
     for card in cards[1:]:
         print(f"○------○\n|    {card[1]} |\n|   {card[0]}  |\n| {card[1]}    |\n○------○")
 
@@ -64,14 +58,14 @@ def play_game():
     # Prompt the user to ask if they are ready to play
     ready = input("Are you ready to play? (Y/N): ")
     
-    # If the user is ready to play, deal 2 cards to the dealer and player
+    # If the user is ready to play, deal 2 cards to the player and 1 for the dealer
     if ready == "Y":
-        dealer_cards = deal_cards(2)
+        dealer_cards = deal_cards(1)
         player_cards = deal_cards(2)
         
         # Print the dealer's first card and update the dealer's count
         print_dealer_hand(dealer_cards)
-        dealer_count = count_cards(dealer_cards[1:])
+        dealer_count = count_cards(dealer_cards)
         print(f"Dealer's count: {dealer_count}")
         
         # Print the player's cards and update the player's count
@@ -91,19 +85,18 @@ def play_game():
         # Deal one card to the player and update the screen
         player_cards.append(deal_cards(1)[0])
         clear_terminal()
-        print_dealer_hand(dealer_cards, reveal_hidden_card=True)
-        dealer_count = count_cards(dealer_cards) # update dealer count
-        print(f"Dealer's count: {dealer_count}")
+        print(f"Dealer's count before drawing: {dealer_count}")
         print_player_hand(player_cards)
         player_count = count_cards(player_cards)
         print(f"Player's count: {player_count}")
         
         # Check if the player has busted or won, and exit the loop if so
         if player_count > 21:
-            print("Bust! You lose.")
-            return
-        elif player_count > dealer_count:
-            print("You win!")
+            print("\nBust! You lose.")
+            while dealer_count < 17:
+                dealer_cards.append(deal_cards(1)[0])
+                dealer_count = count_cards(dealer_cards) # update dealer count
+            print(f"\nDealer's count after drawing: {dealer_count}\n")
             return
         
         # Prompt the user to ask if they want to add another card
@@ -111,16 +104,38 @@ def play_game():
     
     # Update the screen and print the final result
     clear_terminal()
-    print_dealer_hand(dealer_cards, reveal_hidden_card=True)
-    dealer_count = count_cards(dealer_cards) # update dealer count
+    while dealer_count < 17:
+        dealer_cards.append(deal_cards(1)[0])
+        dealer_count = count_cards(dealer_cards) # update dealer count
+    print_dealer_hand(dealer_cards)
     print(f"Dealer's count: {dealer_count}")
     print_player_hand(player_cards)
     print(f"Player's count: {player_count}")
     
-    if player_count <= dealer_count:
-        print("You lose.")
-    else:
+    # Check if player has busted
+    if player_count > 21:
+        print("Bust! You lose.")
+        return
+    # Check if player has won
+    elif player_count > dealer_count:
         print("You win!")
+        return
+    # Check if there is a tie
+    elif player_count == dealer_count:
+        print("Tie!")
+        return
+    # Check if player has a natural blackjack (score of 21)
+    elif player_count == 21:
+        print("You win!")
+        return
+    # Check if dealer has busted and player has not
+    elif player_count <= 21 and dealer_count >21:
+        print("You win!")
+        return
+    # Check if dealer has won
+    elif player_count < dealer_count and dealer_count <=21:
+        print("Bust! You lose")
+        return
 
 # Call the "play_game" function to start the game
 play_game()

@@ -16,5 +16,5 @@ Run the file and follow the prompts to play the game
 ## Other Resources
 Python Libraries:
 
-random
-os
+ - random
+ - os

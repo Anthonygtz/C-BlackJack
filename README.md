@@ -5,7 +5,7 @@ This code is a simple implementation of the game of Blackjack in the console usi
 When implementing the game, the goal was to make it simple and user-friendly. All relevant information, such as the player's and dealer's scores, are displayed clearly on the console for easy viewing. The game also includes error handling for invalid user input.
 
 ## How to Run
-To run the Blackjack game, follow these steps:
+To run the Blackjack game, follow steps:
 
  - Clone the repository containing the game code onto your local machine using the appropriate method (ex: git clone https://github.com/Anthonygtz/C-BlackJack.git)
  - Open the repository folder in your preferred Python IDE

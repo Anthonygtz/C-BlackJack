@@ -14,7 +14,7 @@ To run the Blackjack game, follow steps:
  - Run the file and follow the prompts to play the game
 
 ## Other Resources
-Python Libraries:
+Libraries:
 
  - random
  - os
